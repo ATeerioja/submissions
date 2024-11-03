@@ -16,19 +16,35 @@ const Statistics = (props) => {
 
   return (
   <>
-    <StatisticLine text="good" value={props.good} />
-    <StatisticLine text="neutral" value={props.neutral} />
-    <StatisticLine text="bad" value={props.bad} />
-    <StatisticLine text="all" value={sum} />
-    <StatisticLine text="average" value={average} />
-    <StatisticLine text="positive" value={positive} />
-  </>  
+    <table>
+      <tbody>
+        <StatisticLine text="good" value={props.good} />
+        <StatisticLine text="neutral" value={props.neutral} />
+        <StatisticLine text="bad" value={props.bad} />
+        <StatisticLine text="all" value={sum} />
+        <StatisticLine text="average" value={average.toFixed(1)} />
+        <StatisticLine text="positive" value={positive.toFixed(1)} unit="%"/>
+      </tbody>
+    </table>  
+  </>
   )
 }
 
 const StatisticLine = (props) => {
+  if(props.unit != null) {
+    return (
+      <tr>
+        <td>{props.text}</td>
+        <td>{props.value} {props.unit}</td> 
+      </tr> 
+  )
+  }
+  
   return (
-    <p> {props.text} {props.value}</p> 
+      <tr>
+        <td>{props.text}</td>
+        <td>{props.value}</td> 
+      </tr> 
   )
 }
 
