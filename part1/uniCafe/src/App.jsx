@@ -13,16 +13,32 @@ const Statistics = (props) => {
       <p> No feedback given </p>
     )
   }
-  
+
   return (
   <>
-    <p> good {props.good} </p>
-    <p> neutral {props.neutral} </p>
-    <p> bad {props.bad} </p>
-    <p> all {sum} </p>
-    <p> average {average}</p>
-    <p> positive {positive} %</p>
+    <StatisticLine text="good" value={props.good} />
+    <StatisticLine text="neutral" value={props.neutral} />
+    <StatisticLine text="bad" value={props.bad} />
+    <StatisticLine text="all" value={sum} />
+    <StatisticLine text="average" value={average} />
+    <StatisticLine text="positive" value={positive} />
   </>  
+  )
+}
+
+const StatisticLine = (props) => {
+  return (
+    <p> {props.text} {props.value}</p> 
+  )
+}
+
+const Button = (props) => {
+  return (
+  <>
+    <button onClick={() => props.setGood(props.good + 1)}>good</button>
+    <button onClick={() => props.setNeutral(props.neutral + 1)}>neutral</button>
+    <button onClick={() => props.setBad(props.bad + 1)}>bad</button>
+  </>
   )
 }
 
@@ -35,14 +51,15 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  
-
   return (
     <div>
       <Header name={header} />
-      <button onClick={() => setGood(good + 1)}>good</button>
-      <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
-      <button onClick={() => setBad(bad + 1)}>bad</button>
+      <Button 
+        good={good} setGood={setGood}
+        neutral={neutral} setNeutral={setNeutral}
+        bad={bad} setBad={setBad}
+      />
+
       <Header name={header2} />
       <Statistics good={good} neutral={neutral} bad={bad} />
 
