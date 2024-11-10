@@ -13,9 +13,10 @@ const Content = (props) => {
 }
 
 const Sum = (props) => {
-  let sum = 0
-  props.parts.map(part =>
-    sum += part.exercises
+  const initialValue = 0;
+  const sum = props.parts.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.exercises,
+    initialValue,
   )
   
   return (
