@@ -1,3 +1,6 @@
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
+
 import { useState } from 'react'
 
 const App = () => {
@@ -6,55 +9,22 @@ const App = () => {
       number: '040-1234567'
     }
   ]) 
-  
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-
-  const addPerson = (event) => {
-    event.preventDefault()
-    const personObject = {
-      name: newName,
-      number: newNumber
-    }
-
-    const names = persons.map(person => person.name)
-
-    if(!names.includes(personObject.name)) {
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewNumber('')
-    } else {
-      alert(`${newName} is already added to phonebook`)
-    }
-
-
-    
-
-  }
-
-  const handlePersonChange = (event) => {
-    console.log(event.target.value)
-    setNewName(event.target.value)
-  }
-
-  const handleNumberChange = (event) => {
-    console.log(event.target.value)
-    setNewNumber(event.target.value)
-  }
-  
-
-
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
-        <div>name: <input value={newName} onChange={handlePersonChange}/></div>
-        <div>number: <input value={newNumber} onChange={handleNumberChange} /></div>
-        <div><button type="submit">add</button></div>
-      </form>
+      <PersonForm 
+        persons={persons}
+        personsState={setPersons}
+        name={newName}
+        nameState={setNewName}
+        number={newNumber}
+        numberState={setNewNumber}
+      />
       <h2>Numbers</h2>
-      {persons.map(person => <p key={person.name}>{person.name} {person.number}</p>)}
+      <Persons persons={persons} />
     </div>
   )
 }
