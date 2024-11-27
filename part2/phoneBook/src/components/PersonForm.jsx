@@ -1,10 +1,21 @@
+import personService from '../services/persons'
+import { useEffect } from 'react'
+
 const PersonForm = (props) => {
+  useEffect(() => {
+    personService
+      .getAll()
+  }, [])
+
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
       name: props.name,
       number: props.number
     }
+
+    personService
+      .create(personObject)
 
     const names = props.persons.map(person => person.name)
 
